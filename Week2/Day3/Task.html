@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+     <title>Document</title>
+     <style>
+        *{
+            margin: 5px;
+        }
+        table{
+            border:2px solid black;
+            width: 100%;
+        }
+        tr, td, th{
+            border:1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+        input{
+            border:2px solid black;
+            margin: 20px;
+            border-radius: 5px;
+            padding:7px;
+        }
+        button{
+            color:white;
+            background-color: blue;
+            font-family: "Roboto";
+            border-radius: 6px;
+            padding: 3px;
+            font-size: 14px;
+        }
+     </style>
+</head>
+<body ng-app='app'>
+    
+    <div ng-controller='productController'>
+        <input type="search" ng-model="searchProduct">
+        <button ng-click="searchItem(searchProduct)">Search</button>
+        <table ng-show="isShow">
+            <tr>
+                <th ng-click="changeOrder( 'productId' )">Product Id</th>
+                <th ng-click="changeOrder( 'productName' )">Product Name</th>
+                <th ng-click="changeOrder( 'productPrice' )">Product Price</th>
+                <th ng-click="changeOrder( 'productCategory' )">Product Category</th>
+            </tr>
+        
+            <tr ng-repeat="ePObj in products | orderBy : orderByMe | filter : val">
+                <td>{{ePObj.productId}}</td>
+                <td>{{ePObj.productName}}</td>
+                <td>{{ePObj.productPrice}}</td>
+                <td>{{ePObj.productCategory}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js'></script>
+
+    <script>
+        var app = angular.module('app', []);
+        app.controller('productController', [
+            '$scope',
+            function ($scope) {
+                $scope.products = [
+                {
+                    productId: 1,
+                    productName: "Laptop",
+                    productPrice: 50000,
+                    productCategory: "Electronics"
+                },
+                {
+                    productId: 2,
+                    productName: "Book",
+                    productPrice: 200,
+                    productCategory: "Education"
+                },
+                {
+                    productId: 3,
+                    productName: "Shirt",
+                    productPrice: 1000,
+                    productCategory: "Fashion"
+                },
+                {
+                    productId: 4,
+                    productName: "Shoes",
+                    productPrice: 1500,
+                    productCategory: "Fashion"
+                },
+                {
+                    productId: 5,
+                    productName: "Watch",
+                    productPrice: 3000,
+                    productCategory: "Accessories"
+                },
+                {
+                    productId: 6,
+                    productName: "Bag",
+                    productPrice: 1200,
+                    productCategory: "Accessories"
+                },
+                {
+                    productId: 7,
+                    productName: "Cake",
+                    productPrice: 500,
+                    productCategory: "Food"
+                },
+                {
+                    productId: 8,
+                    productName: "Coffee",
+                    productPrice: 100,
+                    productCategory: "Beverage"
+                },
+                {
+                    productId: 9,
+                    productName: "Pen",
+                    productPrice: 50,
+                    productCategory: "Stationery"
+                },
+                {
+                    productId: 10,
+                    productName: "Notebook",
+                    productPrice: 100,
+                    productCategory: "Stationery"
+                }
+            ];
+
+                $scope.changeOrder = function(x){
+                    $scope.orderByMe = x;
+                }
+                $scope.isShow = false;
+
+                $scope.searchItem = function(x){
+                    $scope.val = x;
+                    $scope.isShow = true;
+                }
+
+            },
+            ]);
+    </script>
+
+</body>
+</html>

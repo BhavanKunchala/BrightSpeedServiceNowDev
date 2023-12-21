@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 12px;
+        }
+
+        .display {
+            display: none;
+        }
+
+        .t1 {
+            color: red;
+            background-color: pink;
+        }
+
+        .m {
+            margin: 10px;
+        }
+
+        .form {
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body ng-app="demo">
+    <div ng-controller="productController">
+        <button ng-hide="isShow">Print</button>
+        <ol>
+            <li ng-repeat="item in arr">{{item.num}}</li>
+        </ol>
+        <P>{{::num}}</P>
+        <button ng-click="changeVal()">
+            Change Value
+        </button>
+        <h1>{{num}}</h1>
+
+        <div>
+            <h1 id="hi" ng-click="changecolor()">Hi</h1>
+        </div>
+
+        <button id="b1">
+            Login
+        </button>
+        <button class="display" id="b2">
+            Sing Up
+        </button><br>
+        <button ng-click="displayButtons()">
+            Toggle
+        </button>
+        <table border="1" class='m'>
+            <tr>
+                <th style="padding:10px;">Name</th>
+                <th>Country</th>
+            </tr>
+            <tr ng-repeat="item in arr">
+                <td style="padding:10px;">{{item.name}}</td>
+                <td style="padding:10px;">{{item.country}}</td>
+            </tr>
+        </table>
+        <form class="form" ng-if="!show">
+            <h3 style="text-align:center">Registration Form</h3>
+            <label for="nameid">Name:</label>
+            <input type="text" ng-model="uName" id="nameid"><br>
+            <label for="ageid">Password:</label>
+            <input type="password" ng-model="uAge" id="ageid"><br>
+            <label for="occupationid">Occupation:</label>
+            <input type="text" ng-model="uOccupation" id="occupationid"><br>
+            <button class="submit" ng-click="register()">Submit</button>
+        </form>
+
+        <input type="checkbox" ng-model="show" id="haveAccount">
+        <label for="haveAccount">Have Account</label>
+
+        <form class="form" ng-if="show">
+            <h3 style="text-align:center">User Login</h3>
+            <label for="nameid">Name:</label>
+            <input type="text" ng-model="lName" ><br>
+            <label for="ageid">Password:</label>
+            <input type="password" ng-model="lAge"><br>
+            <button class="submit" ng-click="login()">Submit</button>
+        </form>
+
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var userDetails = document.getElementById("userDetails");
+        var hi = document.getElementById("hi");
+        var login = document.getElementById("b1");
+        var signUp = document.getElementById("b2");
+        var app = angular.module("demo", []);
+        app.controller("productController", ["$scope", function($scope) {
+            $scope.name = "Bhavan";
+            $scope.isShow = false;
+            $scope.arr = [{
+                num: 1
+            }, {
+                num: 2
+            }, {
+                num: 3
+            }, {
+                num: 4
+            }];
+            $scope.num = 20;
+            $scope.changeVal = function() {
+                $scope.num = 30;
+            }
+            $scope.changecolor = function() {
+                hi.classList.toggle("t1")
+            }
+            $scope.displayButtons = function() {
+                login.classList.toggle("display");
+                signUp.classList.toggle("display");
+            }
+
+            $scope.arr = [{
+                    name: "Bhavan",
+                    country: "India"
+                },
+                {
+                    name: "Aditya",
+                    country: "USA"
+                },
+                {
+                    name: "Raj",
+                    country: "Switzerland"
+                }
+            ]
+
+            $scope.uName;
+            $scope.uAge;
+            $scope.uOccupation;
+            $scope.isShow = false;
+            var users = [];
+            var userObj = {};
+            $scope.register = function() {
+                userObj.name = $scope.uName;
+                userObj.password = $scope.uAge;
+                userObj.Occupation = $scope.uOccupation;
+                users.push(userObj);
+                console.log(users)
+
+
+            }
+            
+            $scope.lName;
+            $scope.lAge;
+            $scope.login = function() {
+                console.log($scope.uName !== "")
+                userObj.name = $scope.lName;
+                userObj.password = $scope.lAge;
+                console.log(userObj);
+            }
+
+        }]);
+    </script>
+</body>
+
+</html>

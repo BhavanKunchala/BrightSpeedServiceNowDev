@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head> </head>
+
+<body ng-app="app">
+    {{1+2}}
+    <div ng-controller="Ctrl1">
+        <h1>{{name}}</h1>
+        <h1>{{arr[2]}}</h1>
+        <h1>{{obj.fname}}</h1>
+        <h1>{{obj.lname}}</h1>
+        <h1>{{obj.age}}</h1>
+        <h1>{{add(29, 62)}}</h1>
+        <h1>{{sub(62,29)}}</h1>
+        <h1>{{mul}}</h1>
+        <h1 id="hello"></h1>
+        <button class="button" id="button"></button>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var button = document.getElementById("button");
+        var hello = document.getElementById("hello");
+        var app = angular.module("app", []);
+        app.controller("Ctrl1", ["$scope", function(s) {
+            s.name = "Bhavan";
+            s.arr = ["Bhavan", "Adi", 29];
+            s.obj = {
+                fname: "Aditya",
+                lname: "Kunchala",
+                age: 20
+            };
+            s.add = (a, b) => a + b;
+            s.sub = function(a, b) {
+                return a - b;
+            }
+
+            function mul(a, b) {
+                return a * b;
+            }
+            s.mul = mul(62, 29);
+            s.greet = function() {
+                hello.textContent = "Hi";
+            }
+
+        }]);
+        button.addEventListener("click", greet);
+    </script>
+</body>
+
+</html>

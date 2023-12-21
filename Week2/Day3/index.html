@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body ng-app="app">
+    <div ng-controller="Ctrl1">
+      <h1>{{message | uppercase}}</h1>
+      <h1>{{message | lowercase}}</h1>
+      <h1>{{price | currency:"INR"}}</h1>
+
+      <!-- order By -->
+      <ul>
+        <li ng-repeat="item in items | orderBy:'pPrice' : true" >{{item.pPrice}}</li>
+      </ul>
+
+      <!-- filter -->
+      <ul>
+        <li ng-repeat="item in items | filter :{pPrice:'i'}" >
+            
+            <p>{{item.pName}}</p>
+            <p>{{item.pPrice}}</p></li>
+      </ul>
+      
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+      var app = angular.module("app", []);
+      app.controller("Ctrl1", [
+        "$scope",
+        function ($scope) {
+          $scope.arr = [10, 20, 40, 10];
+          $scope.items=[{
+            pId:"1", pPrice:"200", pName:"shoe"
+          },{
+            pId:"2", pPrice:"200", pName:"shirt"
+          },{
+            pId:"3", pPrice:"300", pName:"Mobile"
+          },{
+            pId:"4", pPrice:"290", pName:"Wallet"
+          }]
+
+          $scope.message = "Hii";
+          $scope.price = 40;
+        },
+      ]);
+    </script>
+  </body>
+</html>

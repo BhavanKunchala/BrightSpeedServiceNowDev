@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head> </head>
+
+<body ng-app="modname">
+    <h1>{{1+"2"}}</h1>
+    <div ng-controller="studentController as student">
+        <h1>{{student.astrology(1, 4)}}</h1>
+        <h1>{{student.age()}}</h1>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var ape = angular.module("modname", []);
+        ape.controller("studentController", function() {
+            this.name = "Bhavan";
+            this.age = function() {
+                return 21;
+            }
+            var a = 29;
+            var b = 62;
+            this.astrology = (a, b) => a + b;  
+        })
+    </script>
+</body>
+
+</html>
